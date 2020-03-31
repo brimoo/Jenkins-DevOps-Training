@@ -1,5 +1,9 @@
 pipeline {
     agent { docker { image 'python:3.5.1' } }
+
+    environment {
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
  
     stages {
         stage('Build') {
@@ -17,6 +21,12 @@ pipeline {
                 timeout(time: 1, unit: 'MINUTES') {
                     sh './health-check.sh'
                 }
+            }
+        }
+        stage('Credentials') {
+            steps {
+                echo 'Using the cred plugin'
+                echo 'echo aws-secret-access-key=$AWS_SECRET_ACCESS_KEY'
             }
         }
     }
