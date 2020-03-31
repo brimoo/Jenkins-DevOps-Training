@@ -26,7 +26,7 @@ pipeline {
         stage('Credentials') {
             steps {
                 echo 'Using the cred plugin'
-                echo 'echo aws-secret-access-key=$AWS_SECRET_ACCESS_KEY'
+                sh 'echo aws-secret-access-key=$AWS_SECRET_ACCESS_KEY'
             }
         }
     }
