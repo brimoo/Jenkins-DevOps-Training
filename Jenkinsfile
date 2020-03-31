@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python --version'
+                sh 'echo "Hello World"'
             }
         }
         stage('Test') {
@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                retry(3) {
+                    sh './script-not-found.sh'
+                }
             }
         }
     }
