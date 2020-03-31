@@ -14,8 +14,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                retry(3) {
-                    sh './script-not-found.sh'
+                timeout(time: 1, unit: 'MINUTES') {
+                    sh './health-check.sh'
                 }
             }
         }
